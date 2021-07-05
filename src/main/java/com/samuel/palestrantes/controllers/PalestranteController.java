@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,11 +32,8 @@ public class PalestranteController {
   public ResponseEntity<Palestrante> salvar(
     @RequestBody Palestrante palestrante
   ) {
-    Palestrante palestranteParaSerSalvo = palestranteService.save(palestrante);
-    return new ResponseEntity<Palestrante>(
-      palestranteParaSerSalvo,
-      HttpStatus.CREATED
-    );
+    palestranteService.save(palestrante);
+    return new ResponseEntity<Palestrante>(HttpStatus.CREATED);
   }
 
   @PutMapping(value = "/atribuir-evento")
@@ -42,13 +41,13 @@ public class PalestranteController {
     @RequestParam Long idPalestrante,
     @RequestParam Long idEvento
   ) {
-    Palestrante palestranteParaAddEvento = palestranteService.adicionarEvento(
-      idPalestrante,
-      idEvento
-    );
-    return new ResponseEntity<Palestrante>(
-      palestranteParaAddEvento,
-      HttpStatus.OK
-    );
+    palestranteService.adicionarEvento(idPalestrante, idEvento);
+    return new ResponseEntity<Palestrante>(HttpStatus.OK);
+  }
+
+  @DeleteMapping(value = "/{id}")
+  public ResponseEntity<Void> delete(@PathVariable Long id) {
+      palestranteService.delete(id);
+      return ResponseEntity.noContent().build();
   }
 }
