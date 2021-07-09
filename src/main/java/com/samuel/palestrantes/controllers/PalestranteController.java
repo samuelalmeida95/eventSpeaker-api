@@ -50,4 +50,6 @@ public class PalestranteController {
       palestranteService.delete(id);
       return ResponseEntity.noContent().build();
   }
+
+  //adicionar um get por id
 }
