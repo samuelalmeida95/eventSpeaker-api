@@ -42,4 +42,11 @@ public class PalestranteService {
   public void delete(Long idPalestrante) {
     palestranteRepository.deleteById(idPalestrante);
   }
+
+  public void removerEvento(Long idPalestrante, Long idEvento) {
+    Palestrante palestranteRemoveEvento = findById(idPalestrante);
+    Evento eventoParaRemover = eventoService.findById(idEvento);
+    palestranteRemoveEvento.removerEventos(eventoParaRemover);
+    eventoService.deleteEvento(idEvento);
+  }
 }
