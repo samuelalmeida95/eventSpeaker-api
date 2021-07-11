@@ -75,6 +75,10 @@ public class Palestrante {
     this.eventos.add(evento);
   }
 
+  public void removerEventos(Object evento){
+    this.eventos.remove(evento);
+  }
+
   public Set<Evento> getEventos() {
     return this.eventos;
   }

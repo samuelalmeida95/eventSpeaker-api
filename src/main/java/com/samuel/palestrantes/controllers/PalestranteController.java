@@ -28,6 +28,11 @@ public class PalestranteController {
     return ResponseEntity.ok().body(palestranteService.findAll());
   }
 
+  @GetMapping(value = "/{idPalestrante}")
+  public ResponseEntity<Palestrante> findById(@PathVariable Long idPalestrante){
+    return ResponseEntity.ok().body(palestranteService.findById(idPalestrante));
+  }
+
   @PostMapping
   public ResponseEntity<Palestrante> salvar(
     @RequestBody Palestrante palestrante
@@ -45,11 +50,18 @@ public class PalestranteController {
     return new ResponseEntity<Palestrante>(HttpStatus.OK);
   }
 
+  @PutMapping(value = "/remover-evento")
+  public ResponseEntity<Palestrante> removerEvento(
+    @RequestParam Long idPalestrante,
+    @RequestParam Long idEvento
+  ) {
+    palestranteService.removerEvento(idPalestrante, idEvento);
+    return new ResponseEntity<Palestrante>(HttpStatus.OK);
+  }
+
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
       palestranteService.delete(id);
       return ResponseEntity.noContent().build();
   }
-
-  //adicionar um get por id
 }

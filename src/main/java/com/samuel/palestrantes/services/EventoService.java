@@ -27,4 +27,8 @@ public class EventoService {
         Optional<Evento> eventoBuscado = eventoRepository.findById(idEvento);
         return eventoBuscado.get();
     }
+
+    public void deleteEvento(Long idEvento) {
+        eventoRepository.deleteById(idEvento);
+    }
 }
